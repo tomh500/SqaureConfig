@@ -27,6 +27,9 @@
     <ClCompile Include="ConfigCreator.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="VersionCheck.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GetCPUInfo.h">
@@ -38,5 +41,39 @@
     <ClInclude Include="ConfigCreator.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionCheck.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="jumpthrow.cfg">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="wjumpthrow.cfg">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="forward.cfg">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="desubtick.cfg">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="rcdata1.bin">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="+duckjump.cfg">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="-duckjump.cfg">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

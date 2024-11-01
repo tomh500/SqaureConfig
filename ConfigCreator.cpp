@@ -14,14 +14,32 @@ void createConfigFileA(const string& path) {
     string jm;
     string autolookweapon;
     string shootcanceldef;
-
-    if (bindCrossHairSwitch.empty()) {
-        bindCrossHairSwitch = "CapsLock";
-    }
+    string desubtick;
+    string jumpthrow;
+    string wjumpthrow;
+    string duckjump;
 
     ofstream configFile(path);
+   /*
+    cout << "\n请输入跳投绑定键，留空为不启用：";
+    getline(cin, jumpthrow);
+    configFile << "alias +JT \"echo \"SqaureUtiles/jumpthrow\" | exec; \"\n";
+    configFile << "bind " << jumpthrow << " +JT\n";
+
+    cout << "\n请输入W+跳投绑定键，留空为不启用：";
+    getline(cin, wjumpthrow);
+    configFile << "alias +WJT \"echo \"SqaureUtiles/wjumpthrow\" | exec; \"\n";
+    configFile << "alias -WJT \"echo \"SqaureUtiles/forward\" | exec; \"\n";
+    configFile << "bind " << wjumpthrow << " +WJT\n";
+
+    cout << "\n请输入大跳绑定键，留空为不启用：";
+    getline(cin, duckjump);
+    configFile << "alias \"+ag3\" \"echo SqaureUtiles/+duckjump | exec;\"\n";
+    configFile << "alias \"-ag3\" \"echo SqaureUtiles/-duckjump | exec;\"\n";
+    configFile << "bind " << duckjump << " +ag3\n\n";
    
-    cout << "\n\n请输入绑定跟随后坐力的按键（默认CapsLock）：";
+   */
+    cout << "\n\n请输入绑定跟随后坐力的按键（推荐CapsLock）：";
     getline(cin, bindCrossHairSwitch);
 
     cout << "\n请输入滚轮绑定模式（大写字母）\nA 全滚轮跳\nB 上滚轮跳下滚轮切枪\nC 下滚轮跳上滚轮切枪\nD 切枪模式\n\n你选择：";
@@ -64,6 +82,13 @@ void createConfigFileA(const string& path) {
             configFile << "bind MWHEELDOWN \"invnext\"\n";
             configFile << "bind MWHEELUP \"invprev\"\n";
         }
+       // else if (bunnyhop == "E" || bunnyhop == "e")
+     //   {
+     //       configFile << "bind MWHEELDOWN \"+execjump\"\n";
+      //      configFile << "bind MWHEELUP \"+execjump\"\n";
+      //      configFile << "alias +execjump\"exec SqaureUtiles/desubtick\"\n";
+      //      configFile << "alias -execjump \"-jump\"\n\n";
+    //    }
         configFile << "\n";
         
         //急停部分
@@ -160,6 +185,9 @@ void createConfigFileA(const string& path) {
         configFile << "alias jm3 \"jmoff; alias jm1 jm2\"\n";
         cout << "\n请绑定机瞄按键（默认j）：";
         getline(cin, jm);
+        if (jm.empty()) {
+            jm = "j";
+        }
         configFile << "bind " << jm << " jm1\n\n";
         cout << "\n\n";
         cout << "是否启用切刀自动检视，如需使用请输入Y，否则请输入N：";
@@ -171,16 +199,7 @@ void createConfigFileA(const string& path) {
         else {
             configFile << "bind \"3\" slot3\n";
         }
-        cout << "\n\n是否启用开枪取消拆包，如需使用请输入Y，否则请输入N：";
-        getline(cin, shootcanceldef);
-        if (shootcanceldef == "Y" || shootcanceldef == "y")
-        {
-            configFile << "bind \"e\" \"+useatk\"\n";
-            configFile << "alias \"+useatk\" \"+use; bind mouse1 +useatk2\"\n";
-            configFile << "alias \"+useatk2\" \"+attack; -use\"\n";
-            configFile << "alias \"-useatk2\" \"-attack; bind mouse1 +attack\"\n";
-            configFile << "alias \"-useatk\" \"-use; bind mouse1 +attack\"\n";
-        }
+
         configFile.close();
         cout << "已创建配置文件: " << path << endl;
     }

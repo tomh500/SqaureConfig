@@ -133,11 +133,26 @@
     <ClCompile Include="GetCPUInfo.cpp" />
     <ClCompile Include="GetSteamLib.cpp" />
     <ClCompile Include="SqaureConfig.cpp" />
+    <ClCompile Include="VersionCheck.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConfigCreator.h" />
     <ClInclude Include="GetCPUInfo.h" />
     <ClInclude Include="GetSteamLib.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="VersionCheck.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="+duckjump.cfg" />
+    <None Include="-duckjump.cfg" />
+    <None Include="desubtick.cfg" />
+    <None Include="forward.cfg" />
+    <None Include="jumpthrow.cfg" />
+    <None Include="rcdata1.bin" />
+    <None Include="wjumpthrow.cfg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
