@@ -13,7 +13,7 @@
 
 using namespace std;
 
-int localVersion = 3; // 本地版本号
+int localVersion = 2; // 本地版本号
 int CPU = -1;
 
 void GetCPU()
