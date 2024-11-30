@@ -13,7 +13,7 @@
 
 using namespace std;
 
-int localVersion = 2; // 本地版本号
+int localVersion = 7; // 本地版本号
 int CPU = -1;
 
 void GetCPU()
@@ -60,24 +60,27 @@ void ExtractResource(int resourceId, const string& outputFileName) {
 
 int main()
 {
-    system("chcp 936");
+    SetConsoleOutputCP(936);
     system("color 9f");
     createDirectoriesRecursively("C:\\Sqaure\\SqaureUtiles");
+  //  MessageBoxA(NULL, "离线版 不提供支持", "Error", MB_OK |MB_ICONINFORMATION);
+   // /*
 	SetConsoleTitle(L"广场配置1.0安装器");
    
-   string url = "https://tomh500.github.io/SqaureCFG/VersionCheck";
+       string url = "https://tomh500.github.io/SqaureCFG/VersionCheck";
 
-    int remoteVersion = GetRemoteVersion(url);
-    if (remoteVersion == -1) {
-        cerr << "Failed to get remote version." << endl;
-        return 1;
-    }
+        int remoteVersion = GetRemote(url);
 
-   cout << "Local Version: " << localVersion << endl;
-    cout << "Remote Version: " << remoteVersion << endl;
+        if (remoteVersion == -1) {
+            MessageBoxA(NULL, "联网检测失败！", "Error", MB_OK | MB_ICONERROR);
+            return 1;
+        }
+
+       cout << "Local Version: " << localVersion << endl;
+        cout << "Remote Version: " << remoteVersion << endl;
 
 
-    cout << "欢迎使用广场配置1.0安装器，本程序承诺使用合法指令，拒绝作弊\n\n正在检测电脑信息";
+    wcout << "欢迎使用广场配置1.0安装器，本程序承诺使用合法指令，拒绝作弊\n\n正在检测电脑信息";
 
     if (remoteVersion > localVersion) {
         cout << "你在用旧版生成器，现在已推出新版本，请及时更新\n程序将在10秒后继续运行\n\n";
@@ -92,6 +95,7 @@ int main()
     else {
         cout << "你正在用最新版\n";
     }
+  //  */
     for (int i = 0; i < 3; i++)
     {
        
@@ -104,12 +108,13 @@ int main()
     if (CPU == 1)
     {
         system("color ce");
-        cout << "你使用的CPU供应商为：英特尔，已强制开启锁帧模式\n";
+        wcout << "你使用的CPU供应商为：英特尔\n";
+        MessageBoxA(NULL, "请尽快更换到AMD的CPU，按下确认继续使用本程序", "英特尔是垃圾", MB_OK | MB_ICONERROR);
     }
     else if (CPU == 2)
     {
         system("color 2f");
-        cout << "你使用的CPU供应商为：AMD，已强制开启正常模式\n";
+        wcout << "你使用的CPU供应商为：AMD\n";
     }
     else {
         cout << "杂牌CPU，你不配用CFG";
@@ -117,18 +122,18 @@ int main()
         exit(0);
         
     }
-
-    cout << "\n请选择生成方式：\nA.自动化（适用于普通用户，会尝试自动检测CFG目录，如果找不到会生成在错误的位置）\nB.生成在固定目录，需要手动复制到CFG文件夹（稳定）\n请选择：";
-    string CreateMode;
-    getline(cin, CreateMode);
-    if (CreateMode == "B" || CreateMode == "B") {
-        cout << "\n\n 文件生成完毕后请手动千万C:\\Sqaure文件夹下把所有东西复制到你的游戏CFG文件夹\n\n";
+    cout << "\n更新日志：\n1.移除了急停模块\n2.添加了新的移动方式（Beta）\n3.修复了一些已知问题\n\n";
+//    cout << "\n请选择生成方式：\nA.自动化（适用于普通用户，会尝试自动检测CFG目录，如果找不到会生成在错误的位置）\nB.生成在固定目录，需要手动复制到CFG文件夹（稳定）\n请选择：";
+  //  string CreateMode;
+   // getline(cin, CreateMode);
+    //if (CreateMode == "B" || CreateMode == "B") {
+        cout << "\n\n 文件生成完毕后请手动前往 C:\\Sqaure 文件夹下把所有东西复制到你的游戏CFG文件夹！！！\n";
+        cout << "\n\n 文件生成完毕后请手动前往 C:\\Sqaure 文件夹下把所有东西复制到你的游戏CFG文件夹！！！\n";
+        cout << "\n\n 文件生成完毕后请手动前往 C:\\Sqaure 文件夹下把所有东西复制到你的游戏CFG文件夹！！！\n\n";
         ExtractResource(IDR_JUMPTHROW, "C:\\Sqaure\\SqaureUtiles\\jumpthrow.cfg");    // ID为101
         ExtractResource(IDR_WJUMPTHROW, "C:\\Sqaure\\SqaureUtiles\\wjumpthrow.cfg");   // ID为102
         ExtractResource(IDR_FORWARD, "C:\\Sqaure\\SqaureUtiles\\forward.cfg");         // ID为103
         ExtractResource(IDR_DESUBTICK, "C:\\Sqaure\\SqaureUtiles\\desubtick.cfg");
-        ExtractResource(IDR_DUCKJUMP1, "C:\\Sqaure\\SqaureUtiles\\desubtick.cfg");
-        ExtractResource(IDR_DUCKJUMP2, "C:\\Sqaure\\SqaureUtiles\\desubtick.cfg");
             createConfigFileA("C:\\Sqaure\\Sqaure.cfg");
             cout << "CFG已创建，是否添加到autoexec（推荐），如果需要请输入Y，如不需要请输入N，如想要复原请输入R:";
             string autoexec;
@@ -149,11 +154,12 @@ int main()
 
             }
             autoexecfiles.close();
-       
+            MessageBoxA(NULL, "文件生成完毕!请手动前往 C:\\Sqaure 文件夹下把所有东西复制到你的游戏CFG文件夹！！！", "提示", MB_OK | MB_OK);
+            system("start C:\\Sqaure");
 
-            return 1;
-    }
-
+         //   return 1;
+  //  }
+/*
         system("cls");
         cout << "\n自动化模式启用\n\n";
         
@@ -197,16 +203,16 @@ int main()
             autoexecfiles.close();
         }
         else {
-            cout << "未找到 " << gameName << " 的安装路径，因此将创建到 C 盘下" << endl;
+            cout << "未找到 " << gameName << " 的安装路径，请使用手动模式！" << endl;
             string defaultConfigPath = "C:\\Sqaure.cfg";
             createConfigFileA(defaultConfigPath);
         }
 
-    
+    */
 
     
 
-
+   
 
     cout << "成功了！现在你可以添加启动项 +exec Sqaure 进行使用，如果你没有添加到autoexec的话\n程序将在10秒后自动关闭";
     Sleep(10000);

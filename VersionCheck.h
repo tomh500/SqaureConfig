@@ -1,3 +1,3 @@
 #pragma once
 
-int GetRemoteVersion(const std::string& url);
+int GetRemote(const std::string& url);
