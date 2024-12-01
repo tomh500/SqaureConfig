@@ -63,8 +63,8 @@ int main()
     SetConsoleOutputCP(936);
     system("color 9f");
     createDirectoriesRecursively("C:\\Sqaure\\SqaureUtiles");
-  //  MessageBoxA(NULL, "离线版 不提供支持", "Error", MB_OK |MB_ICONINFORMATION);
-   // /*
+    MessageBoxA(NULL, "离线版 不提供支持", "Error", MB_OK |MB_ICONINFORMATION);
+    /*
 	SetConsoleTitle(L"广场配置1.4.1安装器");
    
        string url = "https://tomh500.github.io/SqaureCFG/VersionCheck";
@@ -95,7 +95,7 @@ int main()
     else {
         cout << "你正在用最新版\n";
     }
-  //  */
+    */
     for (int i = 0; i < 3; i++)
     {
        
