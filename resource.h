@@ -3,13 +3,23 @@
 // π© Resource.rc  π”√
 //
 #define IDI_ICON1                       101
-#define IDR_JUMPTHROW                   1001
-#define IDR_WJUMPTHROW                  1002
-#define IDR_FORWARD                     1003
-#define IDR_DESUBTICK                   1004
-#define IDR_DUCKJUMP1                   1005
-#define IDR_DUCKJUMP2                   1006
-
+#define IDR_JUMPTHROW                   10001
+#define IDR_WJUMPTHROW                  10002
+#define IDR_FORWARD                     10003
+#define IDR_DESUBTICK                   10004
+#define IDR_DUCKJUMP1                   10005
+#define IDR_DUCKJUMP2                   10006
+#define IDR_TICK0 10007
+#define IDR_TICK1 10008
+#define IDR_TICK2 10009
+#define IDR_TICK3 10010
+#define IDR_TICK4 10011
+#define IDR_TICK5 10012
+#define IDR_TICK6 10013
+#define IDR_TICK7 10014
+#define IDR_TICK8 10015
+#define IDR_TICK9 10016
+#define IDR_TICK10 10017
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED

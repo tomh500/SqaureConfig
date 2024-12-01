@@ -20,6 +20,7 @@ void createConfigFileA(const string& path) {
     string duckjump;
     string walk;
     string howtomove;
+    string betterbhop;
     ofstream configFile(path, std::ios::out | std::ios::binary);
 
     /*
@@ -42,7 +43,7 @@ void createConfigFileA(const string& path) {
 
     */
     const char BOM[] = { 0xEF, 0xBB, 0xBF };
-    configFile.write(BOM, sizeof(BOM));  // 写入 UTF-8 BOM
+    configFile.write(BOM, sizeof(BOM));  
     int configbind;
     cout << "\n\n本程序提供：\n0.生成配置文件\n1.跟随后坐力绑定\n2.滚轮绑定\n3.移动方案\n4.特殊视角绑定\n5.自动检视绑定\n\n";
         cout << "\n\n请输入绑定跟随后坐力的按键（推荐CapsLock）：";
@@ -57,6 +58,66 @@ void createConfigFileA(const string& path) {
             if (vendor == "GenuineIntel") {
                 //    configFile << "fps_max 159\n";
             }
+            configFile << "sv_cheats 1\n";
+            configFile << "alias t \"TickerEventer1;TickerEventer2;TickerEventer3;TickerEventer4\"\n";
+            configFile << "alias TickerEventer1 \"\"\n";
+            configFile << "alias TickerEventer2 \"\"\n";
+            configFile << "alias TickerEventer3 \"\"\n";
+            configFile << "alias TickerEventer4 \"\"\n";
+
+            configFile << "alias +DuckJump \"alias TickerEventer3 +DuckJump_T\"\n";
+            configFile << "alias -DuckJump \"alias TickerEventer3 -DuckJump_T\"\n";
+            configFile << "alias +DuckJump_T \"+duck; +jump; alias TickerEventer3 \"\";\"\n";
+            configFile << "alias -DuckJump_T \"duck -999 0 0; jump -999 0 0; alias TickerEventer3 \"\";\"\n";
+
+            configFile << "alias WheelJump___ \"alias TickerEventer4 TickerWheelJump\"\n";
+            configFile << "alias TickerWheelJump \"-jump;+jump;-jump;+jump;-jump;+jump;-jump;-jump; alias TickerEventer4 \"\";\"\n";
+
+            // 投出
+            configFile << "alias ThrowingAction \"alias TickerEventer1 ThrowingAction_t\"\n";
+            configFile << "alias ThrowingAction_t \"+attack; -attack; -attack; -attack2; -attack2; alias TickerEventer1 \"\";\"\n";
+
+            // 正常跳投
+            configFile << "alias +JumpingAction \"alias TickerEventer2 +JumpingAction_T\"\n";
+            configFile << "alias -JumpingAction \"alias TickerEventer2 -JumpingAction_T\"\n";
+            configFile << "alias +JumpingAction_T \"+jump; ThrowingAction; alias TickerEventer2 \"\";\"\n";
+            configFile << "alias -JumpingAction_T \"-jump; alias TickerEventer2 \"\";\"\n";
+
+            configFile << "alias +JumpingActionW \"alias TickerEventer2 +JumpingActionW_T\"\n";
+            configFile << "alias -JumpingActionW \"alias TickerEventer2 -JumpingActionW_T\"\n";
+            configFile << "alias +JumpingActionW_T \"+forward; +jump; ThrowingAction; alias TickerEventer2 \"\";\"\n";
+            configFile << "alias -JumpingActionW_T \"-forward; -jump; alias TickerEventer2 \"\";\"\n";
+
+            configFile << "alias +JumpingActionS \"alias TickerEventer2 +JumpingActionS_T\"\n";
+            configFile << "alias -JumpingActionS \"alias TickerEventer2 -JumpingActionS_T\"\n";
+            configFile << "alias +JumpingActionS_T \"+back; +jump; ThrowingAction; alias TickerEventer2 \"\";\"\n";
+            configFile << "alias -JumpingActionS_T \"-back; -jump; alias TickerEventer2 \"\";\"\n";
+
+            configFile << "alias +JumpingActionA \"alias TickerEventer2 +JumpingActionA_T\"\n";
+            configFile << "alias -JumpingActionA \"alias TickerEventer2 -JumpingActionA_T\"\n";
+            configFile << "alias +JumpingActionA_T \"+right; +jump; ThrowingAction; alias TickerEventer2 \"\";\"\n";
+            configFile << "alias -JumpingActionA_T \"-right; -jump; alias TickerEventer2 \"\";\"\n";
+
+            configFile << "alias +JumpingActionD \"alias TickerEventer2 +JumpingActionD_T\"\n";
+            configFile << "alias -JumpingActionD \"alias TickerEventer2 -JumpingActionD_T\"\n";
+            configFile << "alias +JumpingActionD_T \"+left; +jump; ThrowingAction; alias TickerEventer2 \"\";\"\n";
+            configFile << "alias -JumpingActionD_T \"-left; -jump; alias TickerEventer2 \"\";\"\n";
+
+            configFile << "alias JumpingActionW____ \"alias +JumpThrow_ +JumpingActionW; alias -JumpThrow_ -JumpingActionW\"\n";
+            configFile << "alias JumpingActionS____ \"alias +JumpThrow_ +JumpingActionS; alias -JumpThrow_ -JumpingActionS\"\n";
+            configFile << "alias JumpingActionA____ \"alias +JumpThrow_ +JumpingActionA; alias -JumpThrow_ -JumpingActionA\"\n";
+            configFile << "alias JumpingActionD____ \"alias +JumpThrow_ +JumpingActionD; alias -JumpThrow_ -JumpingActionD\"\n";
+
+            configFile << "alias JumpingActionSwitcher_ \"JumpingActionW__\"\n";
+            configFile << "alias JumpingActionW__ \"JumpingActionW____; alias JumpingActionSwitcher_ JumpingActionS__\"\n";
+            configFile << "alias JumpingActionS__ \"JumpingActionS____; alias JumpingActionSwitcher_ JumpingActionA__\"\n";
+            configFile << "alias JumpingActionA__ \"JumpingActionA____; alias JumpingActionSwitcher_ JumpingActionD__\"\n";
+            configFile << "alias JumpingActionD__ \"JumpingActionD____; alias JumpingActionSwitcher_ JumpingActionW__\"\n";
+
+            configFile << "alias +JumpThrow_2 \"+JumpingAction\"\n";
+            configFile << "alias -JumpThrow_2 \"-JumpingAction\"\n";
+
+            configFile << "exec_async JumpThrow/setup_async\n";
 
 
             //准星部分
@@ -67,21 +128,73 @@ void createConfigFileA(const string& path) {
             configFile << "alias xhair2 \"passive; alias xhair xhair1\"\n";
             configFile << "bind " << bindCrossHairSwitch << " xhair\n";
 
+            cout << "\n请绑定连跳增强，留空以不启用：";
+            getline(cin, betterbhop);
+            if (betterbhop == "space" || betterbhop == "SPACE")
+            {
+                configFile << "alias +spacejump \"fps_max 64;bind MWHEELUP doup;bind MWHEELDOWN doup;+jump\"\n";
+                configFile << "alias -spacejump \"fps_max 0;-jump;\"\n";
+            }
+            else
+            {
+                configFile << "alias +btbhop \"fps_max 64\"\n";
+                configFile << "alias -btbhop \"fps_max 0\"\n";
+                configFile << "bind " << betterbhop << " \"+btbhop\"\n";
+
+            }
+
             //滚轮跳
             if (bunnyhop == "A" || bunnyhop == "a")
             {
-                configFile << "bind MWHEELDOWN \"+jump\"\n";
-                configFile << "bind MWHEELUP \"+jump\"\n";
+               
+                if (betterbhop == "space" || betterbhop == "SPACE")
+                {
+                    configFile << "bind MWHEELDOWN \"doup\"\n";
+                    configFile << "bind MWHEELUP \"doup\"\n";
+                    configFile << "alias doup \"-jump;bind MWHEELDOWN +jump;bind MWHEELUP +jump\"\n";
+
+                }
+                else
+                {
+                    configFile << "bind MWHEELDOWN \"+jump\"\n";
+                    configFile << "bind MWHEELUP \"+jump\"\n";
+                }
             }
             else if (bunnyhop == "B" || bunnyhop == "b")
             {
                 configFile << "bind MWHEELDOWN \"invnext\"\n";
                 configFile << "bind MWHEELUP \"+jump\"\n";
+
+                if (betterbhop == "space" || betterbhop == "SPACE")
+                {
+                    configFile << "bind MWHEELDOWN \"invnext\"\n";
+                    configFile << "bind MWHEELUP \"doup\"\n";
+                    configFile << "alias doup \"-jump;bind MWHEELDOWN +jump;bind MWHEELUP +jump\"\n";
+
+                }
+                else
+                {
+                    configFile << "bind MWHEELDOWN \"invnext\"\n";
+                    configFile << "bind MWHEELUP \"+jump\"\n";
+                }
             }
             else if (bunnyhop == "C" || bunnyhop == "c")
             {
-                configFile << "bind MWHEELDOWN \"+jump\"\n";
-                configFile << "bind MWHEELUP \"invprev\"\n";
+          
+
+                if (betterbhop == "space" || betterbhop == "SPACE")
+                {
+                    configFile << "bind MWHEELDOWN \"doup\"\n";
+                    configFile << "bind MWHEELUP \"invprev\"\n";
+
+                    configFile << "alias doup \"-jump;bind MWHEELDOWN +jump;bind MWHEELUP +jump\"\n";
+
+                }
+                else
+                {
+                    configFile << "bind MWHEELDOWN \"+jump\"\n";
+                    configFile << "bind MWHEELUP \"invprev\"\n";
+                }
             }
             else if (bunnyhop == "D" || bunnyhop == "d")
             {
@@ -90,14 +203,31 @@ void createConfigFileA(const string& path) {
             }
             else if (bunnyhop == "E" || bunnyhop == "e")
             {
-                configFile << "bind MWHEELDOWN \"+execjump;clear\"\n";
-                configFile << "bind MWHEELUP \"+execjump;clear\"\n";
-                configFile << "alias +execjump\"exec SqaureUtiles/desubtick\"\n";
-                configFile << "alias -execjump \"-jump\"\n\n";
+                if (betterbhop == "SPACE" || betterbhop == "space")
+                {
+                    configFile << "bind MWHEELDOWN \"doup\"\n";
+                    configFile << "bind MWHEELUP \"doup\"\n";
+                    configFile << "alias +execjump \"exec SqaureUtiles/Desubtick\"\n";
+                    configFile << "alias -execjump \"-jump\"\n";
+                    configFile << "alias doup \"-jump;bind MWHEELDOWN +execjump;bind MWHEELUP +execjump\"\n";
+
+                }
+                else
+                {
+                    configFile << "bind MWHEELDOWN \"+execjump;clear\"\n";
+                    configFile << "bind MWHEELUP \"+execjump;clear\"\n";
+                    configFile << "alias +execjump\"exec SqaureUtiles/desubtick\"\n";
+                    configFile << "alias -execjump \"-jump\"\n\n";
+                }
+          
+
             }
             else {
 
             }
+
+ 
+
             configFile << "\n";
 
             //急停部分
@@ -265,10 +395,8 @@ void createConfigFileA(const string& path) {
                 
             }
             */
-cout << "请输入移动方案（A/B）：";
+cout << "\n请输入移动方案（A/B）：";
     getline(cin, howtomove);
-
-
            if(howtomove=="A"||howtomove=="a")
             {
                 configFile << "bind w +forward\n";
@@ -278,25 +406,44 @@ cout << "请输入移动方案（A/B）：";
             }
            else if (howtomove == "b"||howtomove=="B")
            {
-               configFile << "alias \"+moveforward\" \"forwardback 1 0 0;joy_forward_sensitivity 1;\"\n";
-               configFile << "alias \"-moveforward\" \"forwardback 0 0 0;joy_forward_sensitivity 0;\"\n";
-               configFile << "alias \"+movebackward\" \"forwardback 1 0 0;joy_forward_sensitivity -1;\"\n";
-               configFile << "alias \"-movebackward\" \"forwardback 0 0 0;joy_forward_sensitivity 0;\"\n";
-
-               configFile << "alias \"+moveleft\" \"joy_side_sensitivity -1;rightleft 1 0 0;\"\n";
-               configFile << "alias \"-moveleft\" \"joy_side_sensitivity 0;rightleft 0 0 0;\"\n";
-               configFile << "alias \"+moveright\" \"rightleft 1 0 0;joy_side_sensitivity 1;\"\n";
-               configFile << "alias \"-moveright\" \"rightleft 0 0 0;joy_side_sensitivity 0;\"\n";
-
-               configFile << "bind w \"+moveforward\"\n";
-               configFile << "bind s \"+movebackward\"\n";
-               configFile << "bind a \"+moveleft\"\n";
-               configFile << "bind d \"+moveright\"\n";
-
+               configFile << "joy_response_move 1\n";
+               configFile << "joy_forward_sensitivity 1\n";
+               configFile << "joy_side_sensitivity 1\n";
                configFile << "forward -1009 0 0\n";
                configFile << "back -1009 0 0\n";
                configFile << "left -1009 0 0\n";
-               configFile << "right -1009 0 0\n\n";
+               configFile << "right -1009 0 0\n";
+               configFile << "forwardback 0 0 0\n";
+               configFile << "rightleft 0 0 0\n";
+               configFile << "alias +w \"forwardback 1 0 0;joy_forward_sensitivity 1;alias +s ws\"\n";
+               configFile << "alias w1 \"forwardback 1 0 0;joy_forward_sensitivity 1;alias +s ws\"\n";
+               configFile << "alias ws \"forwardback 0 0 0;alias -s wss;alias -w wsw\"\n";
+               configFile << "alias -w \"forwardback 0 0 0;alias +s s1;alias -s s2;alias -w w2;alias +w w1\"\n";
+               configFile << "alias w2 \"forwardback 0 0 0;alias +s s1;alias -s s2;alias -w w2;alias +w w1\"\n";
+               configFile << "alias +s \"forwardback 1 0 0;joy_forward_sensitivity -1;alias +w sw\"\n";
+               configFile << "alias s1 \"forwardback 1 0 0;joy_forward_sensitivity -1;alias +w sw\"\n";
+               configFile << "alias sw \"forwardback 0 0 0;alias -w wsw;alias -s wss\"\n";
+               configFile << "alias -s \"forwardback 0 0 0;alias +w w1;alias -w w2;alias -s s2;alias +s s1\"\n";
+               configFile << "alias s2 \"forwardback 0 0 0;alias +w w1;alias -w w2;alias -s s2;alias +s s1\"\n";
+               configFile << "alias wss \"forwardback 1 0 0;joy_forward_sensitivity 1;alias +s ws;alias -w w2;alias -s s2\"\n";
+               configFile << "alias wsw \"forwardback 1 0 0;joy_forward_sensitivity -1;alias +w sw;alias -s s2;alias -w w2\"\n";
+               configFile << "alias +a \"rightleft 1 0 0;joy_side_sensitivity -1;alias +d ad\"\n";
+               configFile << "alias a1 \"rightleft 1 0 0;joy_side_sensitivity -1;alias +d ad\"\n";
+               configFile << "alias ad \"rightleft 0 0 0;alias -d add;alias -a ada\"\n";
+               configFile << "alias -a \"rightleft 0 0 0;alias +d d1;alias -d d2;alias -a a2;alias +a a1\"\n";
+               configFile << "alias a2 \"rightleft 0 0 0;alias +d d1;alias -d d2;alias -a a2;alias +a a1\"\n";
+               configFile << "alias +d \"rightleft 1 0 0;joy_side_sensitivity 1;alias +a da\"\n";
+               configFile << "alias d1 \"rightleft 1 0 0;joy_side_sensitivity 1;alias +a da\"\n";
+               configFile << "alias da \"rightleft 0 0 0;alias -a ada;alias -d add\"\n";
+               configFile << "alias -d \"rightleft 0 0 0;alias +a a1;alias -a a2;alias -d d2;alias +d d1\"\n";
+               configFile << "alias d2 \"rightleft 0 0 0;alias +a a1;alias -a a2;alias -d d2;alias +d d1\"\n";
+               configFile << "alias add \"rightleft 1 0 0;joy_side_sensitivity -1;alias +d ad;alias -a a2;alias -d d2\"\n";
+               configFile << "alias ada \"rightleft 1 0 0;joy_side_sensitivity 1;alias +a da;alias -d d2;alias -a a2\"\n";
+               configFile << "bind w \"+w;-radialradio2\"\n";
+               configFile << "bind a \"+a;-radialradio2\"\n";
+               configFile << "bind s \"+s;-radialradio2\"\n";
+               configFile << "bind d \"+d;-radialradio2\"\n\n";
+
 
            }
             configFile << "alias jmon \"viewmodel_fov 68; viewmodel_offset_x -5; viewmodel_offset_y 5; viewmodel_offset_z 5\"\n";
