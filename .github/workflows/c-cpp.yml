@@ -1,23 +1,35 @@
-name: C/C++ CI
+name: Build C++ Project
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - main
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: configure
-      run: ./configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up MSBuild
+      uses: microsoft/setup-msbuild@v1
+
+    - name: Set up Visual Studio
+      uses: microsoft/setup-vs@v1
+      with:
+        vs-version: 2022
+
+    - name: Install dependencies (optional)
+      run: |
+        if exist vcpkg.json (
+          .\vcpkg\vcpkg.exe install
+        )
+
+    - name: Build the solution
+      run: |
+        msbuild.exe SqaureConfig.sln /p:Configuration=Release /m
