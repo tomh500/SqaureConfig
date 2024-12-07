@@ -21,6 +21,7 @@ void createConfigFileA(const string& path) {
     string walk;
     string howtomove;
     string betterbhop;
+    string mwheelshooter;
     ofstream configFile(path, std::ios::out | std::ios::binary);
 
     /*
@@ -45,7 +46,7 @@ void createConfigFileA(const string& path) {
     const char BOM[] = { 0xEF, 0xBB, 0xBF };
     configFile.write(BOM, sizeof(BOM));  
     int configbind;
-    cout << "\n\n本程序提供：\n0.生成配置文件\n1.跟随后坐力绑定\n2.滚轮绑定\n3.移动方案\n4.特殊视角绑定\n5.自动检视绑定\n\n";
+    cout << "\n\n本程序提供：\n0.生成配置文件\n1.跟随后坐力绑定\n2.滚轮绑定\n3.移动方案\n4.特殊视角绑定\n5.自动检视绑定\n6.滚轮手枪速射\n\n";
         cout << "\n\n请输入绑定跟随后坐力的按键（推荐CapsLock）：";
         getline(cin, bindCrossHairSwitch);
 
@@ -146,7 +147,8 @@ void createConfigFileA(const string& path) {
             //滚轮跳
             if (bunnyhop == "A" || bunnyhop == "a")
             {
-               
+                configFile << "alias sq_mwtools_up \"+jump\"\n";
+                configFile << "alias sq_mwtools_down \"+jump\"\n";
                 if (betterbhop == "space" || betterbhop == "SPACE")
                 {
                     configFile << "bind MWHEELDOWN \"doup\"\n";
@@ -162,29 +164,34 @@ void createConfigFileA(const string& path) {
             }
             else if (bunnyhop == "B" || bunnyhop == "b")
             {
-                configFile << "bind MWHEELDOWN \"invnext\"\n";
-                configFile << "bind MWHEELUP \"+jump\"\n";
+                
+                configFile << "alias sq_mwtools_down \"invnext\"\n";
+    
 
                 if (betterbhop == "space" || betterbhop == "SPACE")
                 {
-                    configFile << "bind MWHEELDOWN \"invnext\"\n";
-                    configFile << "bind MWHEELUP \"doup\"\n";
-                    configFile << "alias doup \"-jump;bind MWHEELDOWN +jump;bind MWHEELUP +jump\"\n";
+                    configFile << "alias sq_mwtools_up \"doup\"\n";
+                    configFile << "bind MWHEELDOWN \"sq_mwtools_down\"\n";
+                    configFile << "bind MWHEELUP \"sq_mwtools_up\"\n";
+                    configFile << "alias doup \"-jump;bind MWHEELUP sq_mwtools_up\"\n";
 
                 }
                 else
                 {
-                    configFile << "bind MWHEELDOWN \"invnext\"\n";
-                    configFile << "bind MWHEELUP \"+jump\"\n";
+                    configFile << "alias sq_mwtools_up \"+jump\"\n";
+                    configFile << "bind MWHEELDOWN \"sq_mwtools_down\"\n";
+                    configFile << "bind MWHEELUP \"sq_mwtools_up\"\n";
                 }
             }
             else if (bunnyhop == "C" || bunnyhop == "c")
             {
           
-
+                configFile << "alias sq_mwtools_up \"invprev\"\n";
+                
                 if (betterbhop == "space" || betterbhop == "SPACE")
                 {
-                    configFile << "bind MWHEELDOWN \"doup\"\n";
+                    configFile << "alias sq_mwtools_down \"doup\"\n";
+                    configFile << "bind MWHEELDOWN \"sq_mwtools_down\"\n";
                     configFile << "bind MWHEELUP \"invprev\"\n";
 
                     configFile << "alias doup \"-jump;bind MWHEELDOWN +jump;bind MWHEELUP +jump\"\n";
@@ -192,21 +199,26 @@ void createConfigFileA(const string& path) {
                 }
                 else
                 {
+                    configFile << "alias sq_mwtools_down \"+jump\"\n";
                     configFile << "bind MWHEELDOWN \"+jump\"\n";
                     configFile << "bind MWHEELUP \"invprev\"\n";
                 }
             }
             else if (bunnyhop == "D" || bunnyhop == "d")
             {
-                configFile << "bind MWHEELDOWN \"invnext\"\n";
-                configFile << "bind MWHEELUP \"invprev\"\n";
+                configFile << "alias sq_mwtools_up \"invprev\"\n";
+                configFile << "alias sq_mwtools_down \"invnext\"\n";
+                configFile << "bind MWHEELDOWN \"sq_mwtools_down\"\n";
+                configFile << "bind MWHEELUP \"sq_mwtools_up\"\n";
             }
             else if (bunnyhop == "E" || bunnyhop == "e")
             {
+                configFile << "alias sq_mwtools_up \"doup\"\n";
+                configFile << "alias sq_mwtools_down \"doup\"\n";
                 if (betterbhop == "SPACE" || betterbhop == "space")
                 {
-                    configFile << "bind MWHEELDOWN \"doup\"\n";
-                    configFile << "bind MWHEELUP \"doup\"\n";
+                    configFile << "bind MWHEELDOWN \"sq_mwtools_up\"\n";
+                    configFile << "bind MWHEELUP \"sq_mwtools_up\"\n";
                     configFile << "alias +execjump \"exec SqaureUtiles/Desubtick\"\n";
                     configFile << "alias -execjump \"-jump\"\n";
                     configFile << "alias doup \"-jump;bind MWHEELDOWN +execjump;bind MWHEELUP +execjump\"\n";
@@ -214,8 +226,10 @@ void createConfigFileA(const string& path) {
                 }
                 else
                 {
-                    configFile << "bind MWHEELDOWN \"+execjump;clear\"\n";
-                    configFile << "bind MWHEELUP \"+execjump;clear\"\n";
+                    configFile << "alias sq_mwtools_up \"+execjump;clear\"\n";
+                    configFile << "alias sq_mwtools_down \"+execjump;clear\"\n";
+                    configFile << "bind MWHEELDOWN \"sq_mwtools_down\"\n";
+                    configFile << "bind MWHEELUP \"sq_mwtools_up\"\n";
                     configFile << "alias +execjump\"exec SqaureUtiles/desubtick\"\n";
                     configFile << "alias -execjump \"-jump\"\n\n";
                 }
@@ -225,8 +239,14 @@ void createConfigFileA(const string& path) {
             else {
 
             }
-
- 
+            cout << "\n请输入滚轮手枪速射开关：";
+            getline(cin, mwheelshooter);
+            configFile << "alias shooter_on \"bind mwheelup +attack;bind mwheeldown +attack\"\n";
+            configFile << "alias shooter_off \"bind mwheelup sq_mwtools_up;bind mwheeldown sq_mwtools_down;\"\n";
+            configFile << "alias st1 \"st2\"\n";
+            configFile << "alias st2 \"shooter_on;alias st1 st3;say_team [shooter]1\"\n";
+            configFile << "alias st3 \"shooter_off;alias st1 st2;say_team [shooter]0\"\n\n";
+            configFile << "bind " << mwheelshooter << " st1\n";
 
             configFile << "\n";
 
@@ -406,6 +426,24 @@ cout << "\n请输入移动方案（A/B）：";
             }
            else if (howtomove == "b"||howtomove=="B")
            {
+               configFile << "alias +joy_attack2 \"+attack2\"\n";
+               configFile << "alias -joy_attack2 \"-attack2\"\n";
+               configFile << "alias +joy_radialradio2 \"+radialradio2\"\n";
+               configFile << "alias -joy_radialradio2 \"-radialradio2\"\n";
+               configFile << "bind c +joy_radialradio2\n";
+               configFile << "bind mouse2 +joy_attack2\n";
+               configFile << "cl_scoreboard_mouse_enable_binding +joy_attack2\n";
+
+               configFile << "alias open_buymenu \"-s;-a;-d;-w;move_keyboard\"\n";
+               configFile << "alias close_buymenu \"-left;-right;-back;-forward;move_joy\"\n";
+
+               configFile << "bind key move_switch\n";
+               configFile << "alias move_keyboard \"bind a +left;bind d +right;bind w +forward;bind s +back;say_team 0\"\n";
+               configFile << "alias move_joy \"bind a +a;bind d +d;bind w +w;bind s +s;say_team 1\"\n";
+               configFile << "alias move_switch \"move_keyboard;\"\n";
+               configFile << "alias move_switch_keyboard \"move_keyboard;alias move_switch move_joy\"\n";
+               configFile << "alias move_switch_joy \"move_switch_joy;alias move_switch move_keyboard\"\n";
+
                configFile << "joy_response_move 1\n";
                configFile << "joy_forward_sensitivity 1\n";
                configFile << "joy_side_sensitivity 1\n";
@@ -415,6 +453,12 @@ cout << "\n请输入移动方案（A/B）：";
                configFile << "right -1009 0 0\n";
                configFile << "forwardback 0 0 0\n";
                configFile << "rightleft 0 0 0\n";
+
+               configFile << "bind w \"+w;-radialradio2\"\n";
+               configFile << "bind a \"+a;-radialradio2\"\n";
+               configFile << "bind s \"+s;-radialradio2\"\n";
+               configFile << "bind d \"+d;-radialradio2\"\n";
+
                configFile << "alias +w \"forwardback 1 0 0;joy_forward_sensitivity 1;alias +s ws\"\n";
                configFile << "alias w1 \"forwardback 1 0 0;joy_forward_sensitivity 1;alias +s ws\"\n";
                configFile << "alias ws \"forwardback 0 0 0;alias -s wss;alias -w wsw\"\n";
@@ -427,6 +471,7 @@ cout << "\n请输入移动方案（A/B）：";
                configFile << "alias s2 \"forwardback 0 0 0;alias +w w1;alias -w w2;alias -s s2;alias +s s1\"\n";
                configFile << "alias wss \"forwardback 1 0 0;joy_forward_sensitivity 1;alias +s ws;alias -w w2;alias -s s2\"\n";
                configFile << "alias wsw \"forwardback 1 0 0;joy_forward_sensitivity -1;alias +w sw;alias -s s2;alias -w w2\"\n";
+
                configFile << "alias +a \"rightleft 1 0 0;joy_side_sensitivity -1;alias +d ad\"\n";
                configFile << "alias a1 \"rightleft 1 0 0;joy_side_sensitivity -1;alias +d ad\"\n";
                configFile << "alias ad \"rightleft 0 0 0;alias -d add;alias -a ada\"\n";
@@ -439,10 +484,9 @@ cout << "\n请输入移动方案（A/B）：";
                configFile << "alias d2 \"rightleft 0 0 0;alias +a a1;alias -a a2;alias -d d2;alias +d d1\"\n";
                configFile << "alias add \"rightleft 1 0 0;joy_side_sensitivity -1;alias +d ad;alias -a a2;alias -d d2\"\n";
                configFile << "alias ada \"rightleft 1 0 0;joy_side_sensitivity 1;alias +a da;alias -d d2;alias -a a2\"\n";
-               configFile << "bind w \"+w;-radialradio2\"\n";
-               configFile << "bind a \"+a;-radialradio2\"\n";
-               configFile << "bind s \"+s;-radialradio2\"\n";
-               configFile << "bind d \"+d;-radialradio2\"\n\n";
+
+               configFile << "ThanksForXuan\n";
+
 
 
            }

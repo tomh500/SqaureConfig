@@ -10,10 +10,13 @@
 #include "VersionCheck.h"
 #include "ConfigCreator.h"
 #include "resource.h"
+//#include "SDL2_mixer/include/SDL_mixer.h"
+//#include "SDL2/include/SDL.h"
+#define SDL_MAIN_HANDLED
 
 using namespace std;
 
-int localVersion = 7; // 本地版本号
+int localVersion = 8; // 本地版本号
 int CPU = -1;
 
 void GetCPU()
@@ -65,7 +68,7 @@ int main()
     createDirectoriesRecursively("C:\\Sqaure\\SqaureUtiles");
   //  MessageBoxA(NULL, "离线版 不提供支持", "Error", MB_OK |MB_ICONINFORMATION);
    // /*
-	SetConsoleTitle(L"广场配置1.4.1安装器");
+	SetConsoleTitle(L"广场配置1.5安装器");
    
        string url = "https://tomh500.github.io/SqaureCFG/VersionCheck";
 
@@ -80,7 +83,7 @@ int main()
         cout << "Remote Version: " << remoteVersion << endl;
 
 
-    wcout << "欢迎使用广场配置1.4.1安装器，本程序承诺使用合法指令，拒绝作弊\n\n正在检测电脑信息";
+    wcout << "欢迎使用广场配置1.5安装器，本程序承诺使用合法指令，拒绝作弊\n\n正在检测电脑信息";
 
     if (remoteVersion > localVersion) {
         cout << "你在用旧版生成器，现在已推出新版本，请及时更新\n程序将在10秒后继续运行\n\n";
@@ -95,7 +98,7 @@ int main()
     else {
         cout << "你正在用最新版\n";
     }
-  //  */
+  //   */
     for (int i = 0; i < 3; i++)
     {
        
@@ -122,7 +125,7 @@ int main()
         exit(0);
         
     }
-    cout << "\n更新日志：\n1.移除了急停模块\n2.添加了新的移动方式\n3.添加了增强连跳绑定\n4.修复了一些已知问题\n\n";
+    cout << "\n更新日志：\n1.添加了滚轮手枪速射\n\n";
 //    cout << "\n请选择生成方式：\nA.自动化（适用于普通用户，会尝试自动检测CFG目录，如果找不到会生成在错误的位置）\nB.生成在固定目录，需要手动复制到CFG文件夹（稳定）\n请选择：";
   //  string CreateMode;
    // getline(cin, CreateMode);
