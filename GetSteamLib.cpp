@@ -21,7 +21,7 @@ bool createDirectoriesRecursively(const string& path) {
         if (c == '\\') { 
             if (!directoryExists(tempPath)) {
                 if (!createDirectory(tempPath)) {
-                    return false; // 创建失败
+                    return false; // 创建失
                 }
             }
         }
