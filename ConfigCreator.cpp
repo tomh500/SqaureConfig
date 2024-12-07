@@ -154,6 +154,7 @@ void createConfigFileA(const string& path) {
                     configFile << "bind MWHEELDOWN \"doup\"\n";
                     configFile << "bind MWHEELUP \"doup\"\n";
                     configFile << "alias doup \"-jump;bind MWHEELDOWN +jump;bind MWHEELUP +jump\"\n";
+                    configFile << "bind space +spacejump\n";
 
                 }
                 else
@@ -174,6 +175,7 @@ void createConfigFileA(const string& path) {
                     configFile << "bind MWHEELDOWN \"sq_mwtools_down\"\n";
                     configFile << "bind MWHEELUP \"sq_mwtools_up\"\n";
                     configFile << "alias doup \"-jump;bind MWHEELUP sq_mwtools_up\"\n";
+                    configFile << "bind space +spacejump\n";
 
                 }
                 else
@@ -195,7 +197,7 @@ void createConfigFileA(const string& path) {
                     configFile << "bind MWHEELUP \"invprev\"\n";
 
                     configFile << "alias doup \"-jump;bind MWHEELDOWN +jump;bind MWHEELUP +jump\"\n";
-
+                    configFile << "bind space +spacejump\n";
                 }
                 else
                 {
@@ -217,11 +219,12 @@ void createConfigFileA(const string& path) {
                 configFile << "alias sq_mwtools_down \"doup\"\n";
                 if (betterbhop == "SPACE" || betterbhop == "space")
                 {
+                    configFile << "bind space +spacejump\n";
                     configFile << "bind MWHEELDOWN \"sq_mwtools_up\"\n";
                     configFile << "bind MWHEELUP \"sq_mwtools_up\"\n";
                     configFile << "alias +execjump \"exec SqaureUtiles/Desubtick\"\n";
                     configFile << "alias -execjump \"-jump\"\n";
-                    configFile << "alias doup \"-jump;bind MWHEELDOWN +execjump;bind MWHEELUP +execjump\"\n";
+                    configFile << "alias doup \"-jump;bind MWHEELDOWN +execjump;bind MWHEELUP +execjump\"\n\n";
 
                 }
                 else
@@ -422,7 +425,9 @@ cout << "\n请输入移动方案（A/B）：";
                 configFile << "bind w +forward\n";
                 configFile << "bind s +back\n";
                 configFile << "bind d +right\n";
+                
                 configFile << "bind a +left\n\n";
+                configFile << "bind mouse2 +attack2\n";
             }
            else if (howtomove == "b"||howtomove=="B")
            {

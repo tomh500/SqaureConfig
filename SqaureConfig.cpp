@@ -125,7 +125,7 @@ int main()
         exit(0);
         
     }
-    cout << "\n更新日志：\n1.添加了滚轮手枪速射\n\n";
+    cout << "\n更新日志：\n1.修复了一些已知问题\n\n";
 //    cout << "\n请选择生成方式：\nA.自动化（适用于普通用户，会尝试自动检测CFG目录，如果找不到会生成在错误的位置）\nB.生成在固定目录，需要手动复制到CFG文件夹（稳定）\n请选择：";
   //  string CreateMode;
    // getline(cin, CreateMode);
